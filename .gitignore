@@ -482,3 +482,7 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+AxisModa.Ecommerce.Web/appsettings.json
+AxisModa.Ecommerce.Web/appsettings.Development.json
+AxisModa.Ecommerce.Web/appsettings.json
+AxisModa.Ecommerce.Web/appsettings.Development.json
