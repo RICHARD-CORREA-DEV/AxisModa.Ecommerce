@@ -1,57 +1,34 @@
 using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+using AxisModa.Ecommerce.Data;
 using AxisModa.Ecommerce.Web.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AxisModa.Ecommerce.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(AppDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var produtosMock = new List<ProdutoVitrineViewModel>
-            {
-                new ProdutoVitrineViewModel
-                {
-                    Id = Guid.NewGuid(),
-                    Nome = "Camiseta Minimalist Black",
-                    Descricao = "Camiseta 100% algodao egipcio com caimento oversized premium.",
-                    Preco = 129.90m,
-                    ImagemUrl = "https://unsplash.com"
-                },
-                new ProdutoVitrineViewModel
-                {
-                    Id = Guid.NewGuid(),
-                    Nome = "Jaqueta Couro Classic",
-                    Descricao = "Jaqueta de couro legitimo com costuras reforcadas e ziper robusto.",
-                    Preco = 459.00m,
-                    ImagemUrl = "https://unsplash.com"
-                },
-                new ProdutoVitrineViewModel
-                {
-                    Id = Guid.NewGuid(),
-                    Nome = "Tenis Street Urban v2",
-                    Descricao = "Sneaker casual com palmilha ortopedica e solado emborrachado vulcanizado.",
-                    Preco = 299.90m,
-                    ImagemUrl = "https://unsplash.com"
-                },
-                new ProdutoVitrineViewModel
-                {
-                    Id = Guid.NewGuid(),
-                    Nome = "Vestido Midi Linen",
-                    Descricao = "Vestido casual confeccionado em puro linho texturizado para o verao.",
-                    Preco = 249.90m,
-                    ImagemUrl = "https://unsplash.com"
-                }
-            };
+            var produtosBanco = await _context.Produtos.AsNoTracking().ToListAsync();
 
-            return View(produtosMock);
+            var vitrineVM = produtosBanco.Select(p => new ProdutoVitrineViewModel
+            {
+                Id = p.Id,
+                Nome = p.Nome,
+                Descricao = p.Descricao,
+                Preco = p.Preco,
+                ImagemUrl = p.ImagemUrl
+            }).ToList();
+
+            return View(vitrineVM);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

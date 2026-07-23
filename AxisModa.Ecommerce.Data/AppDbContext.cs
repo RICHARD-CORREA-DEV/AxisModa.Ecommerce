@@ -32,6 +32,10 @@ public class AppDbContext : DbContext
                 .HasPrecision(18, 2)
                 .IsRequired();
 
+            entity.Property(p => p.ImagemUrl)
+                .IsRequired()
+                .HasMaxLength(500);
+
             entity.Property(p => p.DataCriacao)
                 .IsRequired();
         });
