@@ -25,7 +25,8 @@ namespace AxisModa.Ecommerce.Web.Controllers
                 Nome = p.Nome,
                 Descricao = p.Descricao,
                 Preco = p.Preco,
-                ImagemUrl = p.ImagemUrl
+                ImagemUrl = p.ImagemUrl,
+                Categoria = p.Categoria
             }).ToList();
 
             return View(vitrineVM);

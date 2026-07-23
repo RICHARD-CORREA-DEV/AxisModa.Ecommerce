@@ -230,6 +230,30 @@ body.axis-body {
   font-weight: 700;
 }
 
+.axis-product-tabs {
+  gap: 0.45rem;
+}
+
+.axis-filter-pill {
+  border: 1px solid #d6cbc0;
+  border-radius: 999px !important;
+  color: #3b312a;
+  background: #fff;
+  font-weight: 700;
+  padding: 0.45rem 1rem;
+}
+
+.axis-filter-pill:hover {
+  border-color: #bfae9e;
+  color: #2b221c;
+}
+
+.axis-filter-pill.active {
+  color: #fff;
+  background: linear-gradient(120deg, #1c1714, #4d4035);
+  border-color: #1c1714;
+}
+
 .axis-product-card {
   border-radius: 20px;
   background: #fff;
